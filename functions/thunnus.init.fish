@@ -4,4 +4,5 @@ function thunnus.init -d "Initialize thunnus"
   alias aws_credential_selector thunnus.aws.credential_selector
   alias normalize_path thunnus.path.normalize
   alias arbenv thunnus.init.arbenv
+  alias detect_os thunnus.os.detect
 end
