@@ -1,4 +1,4 @@
-function thunnus.ini.get_params_from_section -d "Get space separated parameters form section specified by argument."
+function thunnus.file.ini.get_params_from_section -d "Get space separated parameters form section specified by argument."
   set -l ini_file_path $argv[1]
   set -l section $argv[2]
 

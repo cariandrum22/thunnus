@@ -1,11 +1,11 @@
-function thunnus.aws.credential_selector -d "Export the value of the section specified as the argument from the credentials file to the environment variable."
+function thunnus.aws.credential_selector -d "Export environment variables by specifying section from aws credential."
   set -l section $argv[1]
   set -l flag $argv[2]
 
   if [ -s $HOME/.aws/credentials ]
     set -l params (
       string split ' ' \
-        (ini_get_params_from_section "$HOME/.aws/credentials" $section)
+        (thunnus.file.ini.get_params_from_section "$HOME/.aws/credentials" $section)
     )
 
     for param in $params
