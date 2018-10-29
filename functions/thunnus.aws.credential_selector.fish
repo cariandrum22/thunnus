@@ -13,7 +13,7 @@ function thunnus.aws.credential_selector -d "Export environment variables by spe
       set -gx (echo $kv[1] | tr "[:lower:]" "[:upper:]") $kv[2]
     end
 
-    set -gx AWS_DEAFULT_PROFILE "$section"
+    set -gx AWS_PROFILE "$section"
 
     if [ $flag = "tf" ]
       set -gx TF_VAR_access_key $AWS_ACCESS_KEY_ID
