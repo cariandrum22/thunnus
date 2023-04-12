@@ -1,6 +1,6 @@
 # thunnus
 
-It's a personal utility
+The utility function package for cariandrum22's fish.
 
 ## Install
 
