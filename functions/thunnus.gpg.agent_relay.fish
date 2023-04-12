@@ -19,4 +19,6 @@ function thunnus.gpg.agent_relay -d "Using socat and WSL-Relay to achieve Smart 
   rm -f "$gpgdir/S.gpg-agent*"
   
   socat UNIX-LISTEN:"$gpgdir/S.gpg-agent",fork, EXEC:"\'/mnt/c/Users/$windows_username/Go/bin/wsl-relay.exe\' --input-closes --pipe-closes --gpg",nofork &
+  
+  disown "$last_pid"
 end
