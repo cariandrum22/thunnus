@@ -1,5 +1,20 @@
 # Relay Windows gpg-agent into WSL via wsl-relay + socat (fish)
 function thunnus.gpg.agent_relay -d "Relay Windows gpg-agent socket into WSL (fish)"
+    # Check WSL Interop availability by testing cmd.exe execution
+    if not type -P cmd.exe >/dev/null 2>&1
+        echo "Error: cmd.exe not found in PATH. WSL Interop may be disabled." >&2
+        echo "Please ensure interop.enabled=true and interop.appendWindowsPath=true in /etc/wsl.conf" >&2
+        return 1
+    end
+    
+    # Verify cmd.exe actually works (Interop is fully functional)
+    set -l interop_test (cmd.exe /d /c "echo INTEROP_OK" 2>/dev/null | string trim)
+    if test "$interop_test" != "INTEROP_OK"
+        echo "Error: WSL Interop is not functioning properly. Cannot execute Windows binaries." >&2
+        echo "Please check your WSL configuration and ensure Interop is properly enabled." >&2
+        return 1
+    end
+    
     # Get actual gpg socket path
     set -l sock (gpgconf --list-dirs agent-socket 2>/dev/null)
     test -z "$sock"; and echo "Failed to get agent-socket path" >&2; and return 1
